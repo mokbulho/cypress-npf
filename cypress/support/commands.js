@@ -33,3 +33,5 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
+
+require('cypress-downloadfile/lib/downloadFileCommand')
