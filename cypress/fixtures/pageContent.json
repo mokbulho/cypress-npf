@@ -1,0 +1,7 @@
+{
+  "title_bn": "নতুন পাতা তৈরি",
+  "title_en": "Create new page",
+  "content": "This is the body of the document.{enter}{enter}This is a new paragraph below.",
+  "image": "cypress/fixtures/image.jpg",
+  "file": "cypress/fixtures/PDF.pdf"
+}

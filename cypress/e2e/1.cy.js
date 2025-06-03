@@ -1,7 +1,7 @@
 describe('NPF Automation Test Suite', () => {
     // Shared login function with session management
     const login = () => {
-        cy.session('a2i-login', () => {
+        cy.session('dev-login', () => {
             // cy.visit('https://backoffice.a2i.gov.bd');
             cy.visit('https://frontend-npf-dev.softbd.xyz/');
             // cy.url().should('include', 'https://login-npf-v2.softbd.xyz/realms/npf-global/protocol/openid-connect/auth');
@@ -64,7 +64,8 @@ describe('NPF Automation Test Suite', () => {
         // Upload file for en
         cy.get('input#\\:r27\\:').selectFile('cypress/fixtures/Postman.pdf', { force: true });
 
-        cy.wait(30000);
+        // cy.wait(30000);
+        cy.get('selector-indicating-upload-or-success').should('be.visible');
 
         // Save
         cy.contains('button', 'তৈরি করে বন্ধ করুন').click();
@@ -93,7 +94,7 @@ describe('NPF Automation Test Suite', () => {
     });
 
 
-    it.skip('Edit an existing page', () => {
+    it('Edit an existing page', () => {
         // Go to পাতা section
         cy.contains('h5', 'পাতা').click();
 
@@ -137,10 +138,10 @@ describe('NPF Automation Test Suite', () => {
         cy.get('input#\\:r27\\:').selectFile('cypress/fixtures/Postman.pdf', { force: true });
 
         // Save the page
-        // cy.contains('button', 'সংরক্ষণ করে বন্ধ করুন').click();
+        cy.contains('button', 'সংরক্ষণ করে বন্ধ করুন').click();
     });
 
-    it.skip('Preview an existing page', () => {
+    it('Preview an existing page', () => {
         // Go to পাতা section
         cy.contains('h5', 'পাতা').click();
 
@@ -158,7 +159,7 @@ describe('NPF Automation Test Suite', () => {
         cy.go('back');
     });
 
-    it.skip('Active/Inactive an existing page', () => {
+    it('Active/Inactive an existing page', () => {
         // Go to পাতা section
         cy.contains('h5', 'পাতা').click();
 
@@ -179,7 +180,7 @@ describe('NPF Automation Test Suite', () => {
         cy.get('svg[data-testid="CancelIcon"]').parent('button').click();
     });
 
-    it.skip('Delete an existing page', () => {
+    it('Delete an existing page', () => {
         // Go to পাতা section
         cy.contains('h5', 'পাতা').click();
 
@@ -202,7 +203,7 @@ describe('NPF Automation Test Suite', () => {
 
     /*  ========= Banner module ====================== */
 
-    it.skip('Create a new banner', () => {
+    it('Create a new banner', () => {
         // Go to ব্যানার section
         cy.contains('h5', 'ব্যানার').click();
 
@@ -244,7 +245,7 @@ describe('NPF Automation Test Suite', () => {
         cy.wait(1000);
     });
 
-    it.skip('View an existing banner', () => {
+    it('View an existing banner', () => {
         // Go to ব্যানার section
         cy.contains('h5', 'ব্যানার').click();
 
@@ -267,7 +268,7 @@ describe('NPF Automation Test Suite', () => {
     });
 
 
-    it.skip('Edit an existing banner', () => {
+    it('Edit an existing banner', () => {
         // Go to ব্যানার section
         cy.contains('h5', 'ব্যানার').click();
 
@@ -317,7 +318,7 @@ describe('NPF Automation Test Suite', () => {
         // cy.wait(1000);
     });
 
-    it.skip('Active/Inactive an existing banner', () => {
+    it('Active/Inactive an existing banner', () => {
         // Go to ব্যানার section
         cy.contains('h5', 'ব্যানার').click();
 
@@ -341,7 +342,7 @@ describe('NPF Automation Test Suite', () => {
         // cy.wait(1000);
     });
 
-    it.skip('Delete an existing banner', () => {
+    it('Delete an existing banner', () => {
         // Go to ব্যানার section
         cy.contains('h5', 'ব্যানার').click();
 
@@ -381,18 +382,18 @@ describe('NPF Automation Test Suite', () => {
         cy.get('input[name="title_en"]').type('Todays Bangladesh at a Glance');
 
         // Fill in content in the rich text editor (Bengali)
-        // cy.get('div.ck-content')
-        //     .first()
-        //     .realClick()
-        //     .realType('This is the body of the document.{enter}{enter}')
-        //     .realType('This is a new paragraph below.');
+        cy.get('div.ck-content')
+            .first()
+            .realClick()
+            .realType('This is the body of the document.{enter}{enter}')
+            .realType('This is a new paragraph below.');
 
         // Fill in content in the rich text editor (English)  
-        // cy.get('div.ck-content')
-        //     .eq(1)
-        //     .realClick()
-        //     .realType('This is the body of the document.{enter}{enter}')
-        //     .realType('This is a new paragraph below.');
+        cy.get('div.ck-content')
+            .eq(1)
+            .realClick()
+            .realType('This is the body of the document.{enter}{enter}')
+            .realType('This is a new paragraph below.');
 
         // Upload image file
         cy.get('input[type="file"][accept="image/*"]').first()
@@ -405,19 +406,19 @@ describe('NPF Automation Test Suite', () => {
         
             cy.wait(2000);
         // Upload file for bn
-        // cy.get('input[type="file"][accept="application/pdf"]')
-        //     .eq(0).selectFile('cypress/fixtures/Postman.pdf', { force: true });
+        cy.get('input[type="file"][accept="application/pdf"]')
+            .eq(0).selectFile('cypress/fixtures/Postman.pdf', { force: true });
 
-        // cy.get('input[type="file"][accept="application/pdf"]').selectFile([
-        //     'cypress/fixtures/Postman.pdf',
-        //     'cypress/fixtures/Postman.pdf'
-        // ], { force: true });
+        cy.get('input[type="file"][accept="application/pdf"]').selectFile([
+            'cypress/fixtures/Postman.pdf',
+            'cypress/fixtures/Postman.pdf'
+        ], { force: true });
 
         //Show sub office checkbox
-        // cy.get('input[type="checkbox"][data-indeterminate="false"][value="false"]').check({ force: true });
-        // cy.wait(1000);
-        //Show sub office un-checkbox
-        // cy.get('input[type="checkbox"][data-indeterminate="false"]').uncheck({ force: true });
+        cy.get('input[type="checkbox"][data-indeterminate="false"][value="false"]').check({ force: true });
+        cy.wait(1000);
+        // Show sub office un-checkbox
+        cy.get('input[type="checkbox"][data-indeterminate="false"]').uncheck({ force: true });
 
         //Publication Date
         cy.get('button[aria-label^="Choose date"]').eq(0).click(); // open date picker
@@ -453,7 +454,6 @@ describe('NPF Automation Test Suite', () => {
 
         cy.wait(2000);
         // Click cancel button
-        // cy.contains('button', 'বাতিল').should('be.visible');
         cy.contains('বাতিল').click();
 
 
@@ -577,11 +577,4 @@ describe('NPF Automation Test Suite', () => {
         cy.get('svg[data-testid="CancelIcon"]').parent('button').click();
         // cy.wait(1000);
     });
-
-
-
-
-
-
-
 });

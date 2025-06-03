@@ -1,37 +1,27 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
   return false
 })
 
-
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
 
-require('cypress-downloadfile/lib/downloadFileCommand')
+import loginPage from '../pages/loginPage';
+import dashboardPage from '../pages/dashboardPage';
+
+Cypress.Commands.add('loginToNPF', () => {
+    cy.fixture('credentials').then((credentials) => {
+        cy.session('dev-login', () => {
+            loginPage.visit();
+            loginPage.assertRedirectToLogin();
+            loginPage.enterUsername(credentials.username);
+            loginPage.enterPassword(credentials.password);
+            loginPage.clickLogin();
+            loginPage.assertAfterLoginUrl();
+            loginPage.enterOTP(credentials.otp);
+            loginPage.submitOTP();
+            dashboardPage.navigateToContentMenu();
+        });
+    });
+});

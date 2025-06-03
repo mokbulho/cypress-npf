@@ -9,6 +9,6 @@ module.exports = defineConfig({
     baseUrl: 'https://backoffice.a2i.gov.bd',chromeWebSecurity: false,  
     
     viewportWidth: 1920,
-    viewportHeight: 1080,
-  },
+    viewportHeight: 1080,
+},
 });
